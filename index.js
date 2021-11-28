@@ -53,7 +53,7 @@ app.post('/animals', (req, res) => {
   if (req.body.IsAlive === 'true') {
     IsAlive = true;
   }
-  
+
   let animals = new Animals({
     Quantity: parseInt(req.body.Quantity),
     name: req.body.name,
