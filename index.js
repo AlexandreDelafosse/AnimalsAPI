@@ -1,19 +1,20 @@
+// we create all the conastant that we are going to need to build the CRUD
 const express = require('express')
-
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
-
 const mongoose = require('mongoose')
-
 const Animals = require('./animals.js')
 
+// Using the body parser
 app.use(bodyParser.urlencoded({
   extended: false
 }))
 
+// beginning of the crud
 
 
+// creating the get to get all the elements 
 app.get('/animals', (req, res) => {
 
   Animals.find((err, animals) => {
@@ -26,6 +27,8 @@ app.get('/animals', (req, res) => {
     console.log(animals)
   })
 })
+
+// creating the get to get the elemnts by their ID
 
 app.get('/animals/:id', (req, res) => {
   const id = req.params.id;
@@ -40,6 +43,8 @@ app.get('/animals/:id', (req, res) => {
     console.log(animals)
   })
 })
+
+// Creating the post fonction to insert a new object 
 
 app.post('/animals', (req, res) => {
   console.log("Inserting an animals in the database")
@@ -72,6 +77,8 @@ app.post('/animals', (req, res) => {
   return
 })
 
+// Creating the put fonction to edit elements by searching them with their ID
+
 app.put('/animals/:id', (req, res) => {
 
   console.log("Trying to edit animals")
@@ -92,6 +99,7 @@ app.put('/animals/:id', (req, res) => {
   })
 })
 
+// Creating the delete function to deleting an object by finding them with their ID
 
 app.delete('/animals/:id', (req, res) => {
 
@@ -106,6 +114,8 @@ app.delete('/animals/:id', (req, res) => {
   })
 })
 
+
+// Connection to the mongo DB
 app.listen(port, () => {
 
   mongoose.connect('mongodb+srv://skanderz:Angelemavie1@animalsapi.yvsql.mongodb.net/AnimalsAPI?retryWrites=true&w=majority').
